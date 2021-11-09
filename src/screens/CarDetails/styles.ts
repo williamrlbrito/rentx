@@ -78,4 +78,15 @@ export const Abaut = styled.Text`
   text-align: justify;
 
   margin-top: 23px;
+  line-height: ${RFValue(23)}px;
+`;
+
+export const Acessories = styled.View`
+  width: 100%;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
 `;
