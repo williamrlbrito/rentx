@@ -14,7 +14,7 @@ import {
   Archivo_600SemiBold
 } from '@expo-google-fonts/archivo';
 
-import { SchedulingCompleted } from './src/screens/SchedulingCompleted';
+import { Routes } from './src/routes';
 
 import theme from './src/styles/theme';
 
@@ -33,7 +33,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SchedulingCompleted />
+      <Routes />
     </ThemeProvider>
   );
 }
