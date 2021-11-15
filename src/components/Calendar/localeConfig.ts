@@ -1,0 +1,51 @@
+const ptBR = {
+  monthNames: [
+    'Janeiro', 
+    'Fevereiro', 
+    'Marco', 
+    'Abril', 
+    'Maio', 
+    'Junho', 
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Desembro',
+  ],
+  monthNamesShort: [
+    'Jan', 
+    'Fev', 
+    'Mar', 
+    'Abr', 
+    'Mai', 
+    'Jun', 
+    'Jul',
+    'Ago',
+    'Set',
+    'Out',
+    'Nov',
+    'Des',
+  ],
+  dayNames: [
+    'Domingo', 
+    'Segunda', 
+    'Terca', 
+    'Quarta', 
+    'Quinta', 
+    'Sexta', 
+    'Sabado',
+  ],
+  dayNamesShort: [
+    'DOM', 
+    'SEG', 
+    'TER', 
+    'QUA', 
+    'QUI', 
+    'SEX', 
+    'SAB',
+  ],
+  today: 'hoje'
+}
+
+export { ptBR };
