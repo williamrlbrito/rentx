@@ -2,7 +2,7 @@ export interface CarDTO {
   id: string;
   brand: string;
   name: string;
-  abaut: string;
+  about: string;
   rent: {
     period: string;
     price: number;

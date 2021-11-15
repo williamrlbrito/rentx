@@ -28,7 +28,7 @@ import {
   Rent,
   Period,
   Price,
-  Acessories,
+  Accessories,
   Footer,
   RentalPeriod,
   CalendarIcon,
@@ -73,14 +73,14 @@ export function SchedulingDetails() {
           </Rent>
         </Details>
 
-        <Acessories>
+        <Accessories>
           <Accessory name="380Km/h" icon={speedSvg} />
           <Accessory name="3.2s" icon={accelerationSvg} />
           <Accessory name="800 HP" icon={forceSvg} />
           <Accessory name="Gasoline" icon={gasolineSvg} />
           <Accessory name="Auto" icon={exchangeSvg} />
           <Accessory name="2 people" icon={peopleSvg} />
-        </Acessories>
+        </Accessories>
 
         <RentalPeriod>
           <CalendarIcon>

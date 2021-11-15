@@ -71,7 +71,7 @@ export const Price = styled.Text`
   font-size: ${RFValue(25)}px;
 `;
 
-export const Abaut = styled.Text`
+export const About = styled.Text`
   font-family: ${({theme}) => theme.fonts.primary_400};
   color: ${({theme}) => theme.colors.text};
   font-size: ${RFValue(15)}px;
@@ -81,7 +81,7 @@ export const Abaut = styled.Text`
   line-height: ${RFValue(23)}px;
 `;
 
-export const Acessories = styled.View`
+export const Accessories = styled.View`
   width: 100%;
 
   flex-direction: row;
