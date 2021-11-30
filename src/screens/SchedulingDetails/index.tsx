@@ -66,12 +66,12 @@ export function SchedulingDetails() {
 
   async function handleConfirmRental() {
     setLoading(true);
-    const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
+    const schedules = await api.get(`/schedules_bycars/${car.id}`);
 
-    const unavailable_dates = {
-      ...schedulesByCar.data.unavailable_dates,
+    const unavailable_dates = [
+      ...schedules.data.unavailable_dates,
       ...dates,
-    }
+    ];
 
     await api.post('schedules_byuser', {
       user_id: 1,
