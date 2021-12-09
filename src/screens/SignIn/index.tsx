@@ -24,14 +24,14 @@ import {
   Footer,
 } from './styles';
 
-export function Signin() {
+export function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
   const theme = useTheme();
 
-  async function handleSignin() {
+  async function handleSignIn() {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
@@ -98,7 +98,7 @@ export function Signin() {
           <Footer>
             <Button
               title="Login"
-              onPress={handleSignin}
+              onPress={handleSignIn}
               enabled={true}
               loading={false}
             />
