@@ -1,6 +1,11 @@
-import React from 'react';
-import { TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import {
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Keyboard,
+  Alert,
+} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
 
 import { BackButton } from '../../../components/BackButton';
@@ -18,12 +23,38 @@ import {
   FormTitle,
 } from './styles';
 
+interface Params {
+  user: {
+    name: string;
+    email: string;
+    driverLicense: string;
+  }
+}
+
 export function SignUpSecondStep() {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const navigation = useNavigation();
+  const route = useRoute();
   const theme = useTheme();
+
+  const { user } = route.params as Params;
 
   function handleNavigateBack() {
     navigation.goBack();
+  }
+
+  function handleRegister() {
+    if (!password || !confirmPassword) {
+      Alert.alert('Erro', 'Preencha todos os campos');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      Alert.alert('Erro', 'As senhas não são iguais');
+      return;
+    }
   }
 
   return (
@@ -33,8 +64,8 @@ export function SignUpSecondStep() {
           <Header>
             <BackButton onPress={handleNavigateBack} />
             <StepsContainer>
-              <Bullet active />
               <Bullet />
+              <Bullet active />
             </StepsContainer>
           </Header>
 
@@ -52,16 +83,21 @@ export function SignUpSecondStep() {
             <PasswordInput
               iconName="lock"
               placeholder="Senha"
+              onChangeText={setPassword}
+              value={password}
             />
             <PasswordInput
               iconName="lock"
               placeholder="Confirmar senha"
+              onChangeText={setConfirmPassword}
+              value={confirmPassword}
             />
           </Form>
 
           <Button
             color={theme.colors.success}
             title="Candidatar"
+            onPress={handleRegister}
           />
         </Container>
       </TouchableWithoutFeedback>
