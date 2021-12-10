@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
+import { api } from '../../../services/api';
 
 import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
@@ -45,7 +46,7 @@ export function SignUpSecondStep() {
     navigation.goBack();
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!password || !confirmPassword) {
       Alert.alert('Erro', 'Preencha todos os campos');
       return;
@@ -56,10 +57,19 @@ export function SignUpSecondStep() {
       return;
     }
 
-    navigation.navigate('Confirmation', {
-      title: 'Conta criada!',
-      message: `Agora e só fazer o login\ne aproveitar.`,
-      nextScreenRoute: 'SignIn',
+    await api.post('/users', {
+      name: user.name,
+      email: user.email,
+      driver_license: user.driverLicense,
+      password,
+    }).then(() => {
+      navigation.navigate('Confirmation', {
+        title: 'Conta criada!',
+        message: `Agora e só fazer o login\ne aproveitar.`,
+        nextScreenRoute: 'SignIn',
+      });
+    }).catch(() => {
+      Alert.alert('Opa', 'Houve um erro ao criar a conta');
     });
   }
 
