@@ -53,7 +53,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       const userCollection = database.get<ModelUser>('users');
       await database.write(async () => {
-        await userCollection.create((newUser)=> {
+        const { id } = await userCollection.create((newUser)=> {
           newUser.user_id = user.id;
           newUser.name = user.name;
           newUser.email = user.email;
@@ -61,9 +61,9 @@ function AuthProvider({ children }: AuthProviderProps) {
           newUser.avatar = user.avatar;
           newUser.token = token;
         });
-      });
 
-      setData({ ...user, token });
+        setData({ ...user, id, token });
+      });
     } catch (error) {
       throw new Error(error);
     }
