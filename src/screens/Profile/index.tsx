@@ -97,8 +97,28 @@ export function Profile() {
         return;
       }
 
+      console.log(error);
+
       Alert.alert('Erro ao atualizar perfil', 'Ocorreu um erro ao atualizar seu perfil, tente novamente.');
     }
+  }
+
+  async function handleSignOut() {
+    Alert.alert(
+      'Sair',
+      'Deseja realmente sair?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+          onPress: () => {},
+        },
+        {
+          text: 'Sim',
+          onPress: () => signOut()
+        }
+      ]
+    );
   }
 
   return (
@@ -112,7 +132,7 @@ export function Profile() {
                 onPress={handleBack}
               />
               <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogoutButton onPress={signOut} >
+              <LogoutButton onPress={handleSignOut} >
                 <Feather
                   name="power"
                   size={24}
