@@ -3,10 +3,13 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import * as Yup from 'yup';
+
 import { useAuth } from '../../hooks/auth';
 import { Feather } from '@expo/vector-icons'
 import { useTheme } from 'styled-components';
@@ -14,6 +17,7 @@ import { useTheme } from 'styled-components';
 import { BackButton } from '../../components/BackButton';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
+import { Button } from '../../components/Button';
 
 import {
   Container,
@@ -35,7 +39,7 @@ export function Profile() {
   const theme = useTheme();
   const navegation = useNavigation();
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
-  const { user, signOut } = useAuth();
+  const { user, signOut, updateUser } = useAuth();
   const [name, setName] = useState(user.name);
   const [driverLicense, setDriverLicense] = useState(user.driver_license);
   const [avatar, setAvatar] = useState(user.avatar);
@@ -65,6 +69,36 @@ export function Profile() {
     }
 
     setAvatar(result.uri);
+  }
+
+  async function handleProfileUpdate() {
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatório'),
+        driverLicense: Yup.string().required('CNH obrigatório'),
+      });
+
+      const data = { name, driverLicense };
+      await schema.validate(data);
+      await updateUser({
+        ...user,
+        name,
+        driver_license: driverLicense,
+        avatar,
+      });
+
+      Alert.alert('Perfil atualizado com sucesso!');
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        error.errors.forEach(async (error) => {
+          Alert.alert(error);
+        });
+
+        return;
+      }
+
+      Alert.alert('Erro ao atualizar perfil', 'Ocorreu um erro ao atualizar seu perfil, tente novamente.');
+    }
   }
 
   return (
@@ -159,6 +193,11 @@ export function Profile() {
                 />
               </Section>
             }
+
+            <Button
+              title='Salvar'
+              onPress={handleProfileUpdate}
+            />
           </Content>
         </Container>
       </TouchableWithoutFeedback>
