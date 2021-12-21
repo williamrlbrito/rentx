@@ -35,17 +35,13 @@ export function Profile() {
   const theme = useTheme();
   const navegation = useNavigation();
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const [name, setName] = useState(user.name);
   const [driverLicense, setDriverLicense] = useState(user.driver_license);
   const [avatar, setAvatar] = useState(user.avatar);
 
   function handleBack() {
     navegation.goBack();
-  }
-
-  function handleSignOut() {
-
   }
 
   function handleOptionChange(optionSelected: 'dataEdit' | 'passwordEdit') {
@@ -82,7 +78,7 @@ export function Profile() {
                 onPress={handleBack}
               />
               <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogoutButton onPress={handleSignOut} >
+              <LogoutButton onPress={signOut} >
                 <Feather
                   name="power"
                   size={24}
